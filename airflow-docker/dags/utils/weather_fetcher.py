@@ -1,11 +1,15 @@
 from dotenv import load_dotenv
 import os
 
+dotenv_path = os.path.join(os.path.dirname(__file__), "../../.env")
+
 # Load .env file
-load_dotenv()
+load_result = load_dotenv(dotenv_path)
+print('Load Result:', load_result)
 
 # Access secrets
 OPEN_WEATHER_API_KEY = os.getenv("OPEN_WEATHER_API_KEY")
+print('API_KEY:', OPEN_WEATHER_API_KEY)
 # database_url = os.getenv("DATABASE_URL")
 
 # print(f"API Key: {api_key}")
