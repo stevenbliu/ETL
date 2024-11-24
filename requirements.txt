@@ -1,0 +1,7 @@
+numpy
+pandas
+requests
+apache-airflow
+
+# jupyter
+ipykernel
