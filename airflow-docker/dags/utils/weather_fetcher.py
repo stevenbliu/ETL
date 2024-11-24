@@ -1,7 +1,21 @@
+from dotenv import load_dotenv
+import os
+
+# Load .env file
+load_dotenv()
+
+# Access secrets
+OPEN_WEATHER_API_KEY = os.getenv("OPEN_WEATHER_API_KEY")
+# database_url = os.getenv("DATABASE_URL")
+
+# print(f"API Key: {api_key}")
+# print(f"Database URL: {database_url}")
+
+
 import requests
 
 def fetch_weather_data():
-    API_KEY = "962dd890a5c714c9d46c1bd51f1ed384"
+    API_KEY = OPEN_WEATHER_API_KEY
     CITY = "San Francisco"
     BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
     
