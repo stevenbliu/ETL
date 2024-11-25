@@ -1,0 +1,26 @@
+from kafka import KafkaProducer
+import json
+import random
+
+# Initialize KafkaProducer
+producer = KafkaProducer(
+    bootstrap_servers=['localhost:9092'],  # Kafka server
+    value_serializer=lambda v: json.dumps(v).encode('utf-8')  # Serializer to encode JSON
+)
+
+transaction_types = ['purchase', 'refund', 'transfer']
+for i in range(100):  # Loop to send 100 messages
+    transaction = {
+        'transaction_id': i,
+        'user_id': random.randint(1, 100),
+        'amount': round(random.uniform(10, 1000), 2),  # Random amount between 10 and 1000
+        'type': random.choice(transaction_types),  # Random transaction type
+        'timestamp': '2024-11-25T10:00:00Z'  # Timestamp for the transaction
+    }
+
+    # Send the transaction message to Kafka topic 'transactions'
+    producer.send('transactions', transaction)
+    print(f'Sent: {transaction}')
+
+# Ensure all messages are sent before closing
+producer.flush()

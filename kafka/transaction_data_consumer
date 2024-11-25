@@ -1,0 +1,17 @@
+from kafka import KafkaConsumer
+import json
+
+# Initialize KafkaConsumer to read from the 'transactions' topic
+consumer = KafkaConsumer(
+    'transactions',  # Kafka topic
+    bootstrap_servers=['localhost:9092'],  # Kafka server
+    group_id='transaction-consumer-group',  # Consumer group
+    value_deserializer=lambda x: json.loads(x.decode('utf-8'))  # Deserializer to decode JSON
+)
+
+print("Consumer is listening for messages...")
+
+# Consume messages from Kafka
+for message in consumer:
+    # Print out the consumed message
+    print(f'Received: {message.value}')
