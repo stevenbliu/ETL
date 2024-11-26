@@ -13,6 +13,7 @@ This checklist represents a comprehensive approach to building a senior-level da
 - [x] Run example **DAGs** to ensure the environment is working correctly.
 - [ ] Integrate a basic **DAG** to fetch weather data from an external **API**.
 - [ ] Include **Airflow's scheduling system** to automate API fetches for weather data.
+- [x] Added basic DAG scheduled for every 30 seconds with cron expressions.
 
 ### 2. Data Ingestion Basics
 - [x] **Ingest weather data** from an external **API** 
