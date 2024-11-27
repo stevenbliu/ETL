@@ -56,3 +56,5 @@ with DAG(
         task_id='trigger_child_dag',
         trigger_dag_id='hello_task',  # ID of the DAG to trigger
     )
+
+print('123')
