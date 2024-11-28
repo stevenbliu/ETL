@@ -24,8 +24,8 @@ This checklist represents a comprehensive approach to building a senior-level da
 - [x] Create and test **Kafka Consumer** to receive synthetic data.
 
 ### 3. Data Storage
-- [ ] Set up a **PostgreSQL** or **Snowflake** database to store ingested data.
-- [ ] Write a pipeline to ingest weather data into **PostgreSQL/Snowflake** and ensure successful data storage.
+- [x] Set up a **PostgreSQL** or **Snowflake** database to store ingested data. (Set up PSQL)
+- [x] Write a pipeline to ingest weather data into **PostgreSQL/Snowflake** and ensure successful data storage.
 - [ ] Ensure database schema and tables are optimized for time-series or batch data (weather data, in this case).
 
 ---
