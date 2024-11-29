@@ -34,7 +34,12 @@ This checklist represents a comprehensive approach to building a senior-level da
   - # Batch: PostgreSQL, MySQL, SQL Server
     - General Relational Databases can be be optimized with:
       - [] Partitioning based on time-intervals (daily, monthly, yearly)
-      - [] Create indexes on the timestamp and other frequently queried fields (IDs, etc.)
+      - [x] Create indexes frequently queried fields (IDs, etc.)
+        - [x] Created index for transaction_types
+              CREATE INDEX idx_transaction_type
+                  ON transactions(type);
+        - [x] Verified index is created
+
       - [] Retention Policy. Delete or archive old data to prevent table from growing too large
       - [] Compression (pg_compress in PostgreSQL) to reduce size of historical data
 

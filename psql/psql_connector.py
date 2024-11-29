@@ -29,7 +29,11 @@ transaction_types = ['purchase', 'refund', 'transfer']
 base_timestamp = datetime.now()
 
 for i in range(1, 100):
-    current_timestamp = base_timestamp + timedelta(minutes=i)
+    # Modify the month based on the index i (cycle through months)
+    new_month = (base_timestamp.month + i - 1) % 12 + 1  # Ensure month stays between 1 and 12
+    
+    # Create a new timestamp with the modified month (keeping day, hour, minute, etc. unchanged)
+    current_timestamp = base_timestamp.replace(month=new_month) + timedelta(minutes=i)
     
     # Generate transaction ID based on the timestamp (you can use any part of the timestamp here)
     transaction_id = int(current_timestamp.timestamp())  # Unix timestamp in seconds
@@ -45,14 +49,17 @@ for i in range(1, 100):
         'timestamp': timestamp_str  # Timestamp for the transaction
     }
 
-    
-    
     # Insert transaction into the database
     cur.execute("""
         INSERT INTO transactions (transaction_id, user_id, amount, type, timestamp)
         VALUES (%s, %s, %s, %s, %s)
     """, (transaction['transaction_id'], transaction['user_id'], transaction['amount'], transaction['type'], transaction['timestamp']))
 
+    # Create index for transaction types
+    cur.execute("""
+        CREATE INDEX IF NOT EXISTS idx_transaction_type
+        ON transactions(type);
+    """)
 
 # Commit the changes and close the connection
 conn.commit()
