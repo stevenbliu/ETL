@@ -28,10 +28,10 @@ This checklist represents a comprehensive approach to building a senior-level da
 - [x] Write a pipeline to ingest weather data into **PostgreSQL/Snowflake** 
 - [x] Ensure successful data storage.
 - [ ] Ensure database schema and tables are optimized for time-series or batch data (weather data, in this case).
-  ## Assuming wether data
-  - # Time-Series: Use TimescaleDB, InfluxDB
+  #### Assuming wether data
+  - #### Time-Series: Use TimescaleDB, InfluxDB
     - Specialized time-series databases
-  - # Batch: PostgreSQL, MySQL, SQL Server
+  - #### Batch: PostgreSQL, MySQL, SQL Server
     - General Relational Databases can be be optimized with:
       - [] Partitioning based on time-intervals (daily, monthly, yearly)
       - [x] Create indexes frequently queried fields (IDs, etc.)
