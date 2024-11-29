@@ -49,3 +49,6 @@ You should see transactions in the list.
 View the schema of the transactions table:
     \d transactions
 This will display details about the table's structure.
+
+To check if a table is populated in PostgreSQL using the CLI, you can use the following command:
+    SELECT * FROM table_name;

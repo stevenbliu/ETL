@@ -11,22 +11,32 @@ This checklist represents a comprehensive approach to building a senior-level da
 ### 1. Orchestration with Apache Airflow
 - [x] Set up **Apache Airflow** with `docker-compose` and verify the environment is running.
 - [x] Run example **DAGs** to ensure the environment is working correctly.
-- [ ] Integrate a basic **DAG** to fetch weather data from an external **API**.
-- [ ] Include **Airflow's scheduling system** to automate API fetches for weather data.
-- [x] Added basic DAG scheduled for every 1 min with cron expressions. (Shorter time requires more work)
+- [x] Integrate a basic script to fetch weather data from an external **API** (OpenWeaher).
+- [x] Include **Airflow's scheduling system** to automate events.
 - [x] Set up logging of DAGS. Viewable in UI.
 - [ ] Set up DAGs on Trigger.
 
 ### 2. Data Ingestion Basics
-- [x] **Ingest weather data** from an external **API** 
+- [x] **Ingest data** from an external **API** 
 - [x] Set up **Kafka** using `docker-compose` to manage data streams.
 - [x] Create and test **Kafka Producer** to send synthetic data.
 - [x] Create and test **Kafka Consumer** to receive synthetic data.
 
+
 ### 3. Data Storage
-- [x] Set up a **PostgreSQL** or **Snowflake** database to store ingested data. (Set up PSQL)
-- [x] Write a pipeline to ingest weather data into **PostgreSQL/Snowflake** and ensure successful data storage.
+- [x] Set up a **PostgreSQL** or **Snowflake** database to store ingested synthetic and API data. (Currently set up with PSQL)
+- [x] Write a pipeline to ingest weather data into **PostgreSQL/Snowflake** 
+- [x] Ensure successful data storage.
 - [ ] Ensure database schema and tables are optimized for time-series or batch data (weather data, in this case).
+  ## Assuming wether data
+  - # Time-Series: Use TimescaleDB, InfluxDB
+    - Specialized time-series databases
+  - # Batch: PostgreSQL, MySQL, SQL Server
+    - General Relational Databases can be be optimized with:
+      - [] Partitioning based on time-intervals (daily, monthly, yearly)
+      - [] Create indexes on the timestamp and other frequently queried fields (IDs, etc.)
+      - [] Retention Policy. Delete or archive old data to prevent table from growing too large
+      - [] Compression (pg_compress in PostgreSQL) to reduce size of historical data
 
 ---
 
@@ -82,6 +92,11 @@ This checklist represents a comprehensive approach to building a senior-level da
 - [ ] Test **horizontal scaling** for Apache Spark jobs to distribute workload.
 - [ ] Load test the system and identify bottlenecks.
 
+### API Interaction
+  - [] Implement graceful error handling. Ex. PlaidApiException catches any specific errors from the Plaid API, while the generic Exception catches other unexpected errors.
+  - [] Manage pagination for requests with large number of transactions by using count and offset. The count is set to the maximum number of transactions per request (250 in this case), and offset helps you retrieve subsequent pages of transactions if needed.
+  - [] Response Handling. In the original code, you're accessing the transactions directly from the response object as response['transactions']. However, depending on the SDK version and response structure, this may need to be adjusted.
+  - [x] Ensure that your ETL process is designed to handle rate-limiting and retries.
 ---
 
 ## Phase 5: Automation and CI/CD

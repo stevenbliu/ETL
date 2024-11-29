@@ -5,7 +5,7 @@ dotenv_path = os.path.join(os.path.dirname(__file__), "../../.env")
 
 # Load .env file
 load_result = load_dotenv(dotenv_path)
-print('Load Result:', load_result)
+print('.env Load Result:', load_result)
 
 # Access secrets
 OPEN_WEATHER_API_KEY = os.getenv("OPEN_WEATHER_API_KEY")
@@ -18,8 +18,8 @@ print('API_KEY:', OPEN_WEATHER_API_KEY)
 
 import requests
 
-def fetch_weather_data():
-    API_KEY = OPEN_WEATHER_API_KEY
+def fetch_weather_data(API_KEY=OPEN_WEATHER_API_KEY):
+    # API_KEY = OPEN_WEATHER_API_KEY
     CITY = "San Francisco"
     BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
     
