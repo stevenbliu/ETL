@@ -24,25 +24,28 @@ This checklist represents a comprehensive approach to building a senior-level da
 
 
 ### 3. Data Storage
-- [x] Set up a **PostgreSQL** or **Snowflake** database to store ingested synthetic and API data. (Currently set up with PSQL)
+- [x] Set up a **PostgreSQL** or **Snowflake** database to store ingested synthetic and API data.
+  - [x] Set up with PSQL on host machine
+  - [ ] Set up PSQL in a Docker Container w/ pg_cron
 - [x] Write a pipeline to ingest weather data into **PostgreSQL/Snowflake** 
 - [x] Ensure successful data storage.
 - [ ] Ensure database schema and tables are optimized for time-series or batch data (weather data, in this case).
-  ## Assuming wether data
+- [ ] Set up PSQL in a docker container
+  ## Databases to use depend in data
   - # Time-Series: Use TimescaleDB, InfluxDB
     - Specialized time-series databases
   - # Batch: PostgreSQL, MySQL, SQL Server
     - General Relational Databases can be be optimized with:
-      - [] Partitioning based on time-intervals (daily, monthly, yearly)
+      - [ ] Partitioning based on time-intervals (daily, monthly, yearly)
       - [x] Create indexes frequently queried fields (IDs, etc.)
         - [x] Created index for transaction_types
-              CREATE INDEX idx_transaction_type
-                  ON transactions(type);
         - [x] Verified index is created
-
-      - [] Retention Policy. Delete or archive old data to prevent table from growing too large
-      - [] Compression (pg_compress in PostgreSQL) to reduce size of historical data
-
+      - [ ] Retention Policy. Delete or archive old data to prevent table from growing too large
+        - [ ] Install pg_cron to PostgreSQL
+      - [ ] Compression (pg_compress in PostgreSQL) to reduce size of historical data
+  - # 
+ 
+---
 ---
 
 ## Phase 2: Batch and Real-Time Data Integration
