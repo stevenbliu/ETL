@@ -1,7 +1,7 @@
 # version: '3.8'
 services:
   postgres:
-    image: postgres:13
+    image: my_custom_postgres:latest
     environment:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mysecretpassword
@@ -10,6 +10,8 @@ services:
       - "5433:5432"
     volumes:
       - ./data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d/  # This mounts your initialization scripts
+      - ./pg-config:/etc/postgresql/  # This mounts your custom pg_config (for setting PostgreSQL options)
     networks:
       # - mynetwork
       - psql_network
@@ -24,6 +26,10 @@ services:
       - "80:80"
     depends_on:
       - postgres
+    volumes:
+      - ./pgadmin_config/servers.json:/pgadmin4/servers.json
+      # - ./path/to/servers.json:/pgadmin4/servers.json  # Update this path
+
     networks:
       # - mynetwork
       - psql_network

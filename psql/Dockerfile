@@ -1,13 +1,11 @@
 FROM postgres:13
 
-# Install required dependencies and pg_cron
-RUN apt-get update && apt-get install -y \
-    postgresql-13-cron \
-    && rm -rf /var/lib/apt/lists/*
+# Install nano
+RUN apt-get update && apt-get install -y nano && apt-get clean
+RUN apt-get update && apt-get install -y postgresql-13-cron
 
-RUN apt-get update
-RUN apt-get install nano
+# Ensure the pg_cron shared library is preloaded
+# RUN echo "shared_preload_libraries = 'pg_cron'" >> /var/lib/postgresql/data/postgresql.conf
 
+# RUN echo "CREATE EXTENSION IF NOT EXISTS pg_cron;" > /docker-entrypoint-initdb.d/enable_pgcron.sql
 
-# Enable pg_cron in PostgreSQL config
-RUN echo "shared_preload_libraries = 'pg_cron'" >> /usr/share/postgresql/postgresql.conf.sample
