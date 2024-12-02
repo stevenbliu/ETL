@@ -3,27 +3,17 @@ import random
 from datetime import datetime, timedelta
 import calendar
 
-# Connect to your PostgreSQL database
-
-# conn = psycopg2.connect(
-#     dbname="transaction_data",  # Replace with your database name
-#     user="postgres",  # Replace with your username
-#     password="sbl214",  # Replace with your password
-#     host="localhost",  # If running locally
-#     port="5432"  # Default PostgreSQL port
-# )
-# Connect to your PostgreSQL database
+# Connect to your containzierized PostgreSQL database
 conn = psycopg2.connect(
     dbname="mydatabase",  # Replace with your database name
     user="myuser",  # Replace with your username
     password="mysecretpassword",  # Replace with your password
-    # host="172.21.0.2",  # If running container
-    host="localhost",  # If running container
-    # host = "psql-postgres-1",
-    # host = '0.0.0.0',
-    # host = 'host.docker.internal', 
-    port="5433"  # Default PostgreSQL port
+    host="localhost",  
+    port="5433"  # Containerized PostgreSQL port set in docker-compose
+    # host="psql-postgres-1",  # If running container python script from container db
+    # port="5432"  # Default PostgreSQL port for local db
 )
+
 cur = conn.cursor()
 
 # Create the table if it doesn't exist

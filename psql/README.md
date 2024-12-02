@@ -52,3 +52,12 @@ This will display details about the table's structure.
 
 To check if a table is populated in PostgreSQL using the CLI, you can use the following command:
     SELECT * FROM table_name;
+
+### PSQL Tasks
+- [x] Set up + connect PSQL **Containerized** 
+    - [x] Test updating records
+- [x] Set up + connect PSQL **Local**
+    - [x] Test updating records
+
+
+## CLI COMMANDS:
