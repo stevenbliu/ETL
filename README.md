@@ -39,10 +39,10 @@ This checklist represents a comprehensive approach to building a senior-level da
       - [x] Create indexes frequently queried fields (IDs, etc.)
         - [x] Created index for transaction_types
         - [x] Verified index is created
-      - [ ] Retention Policy. Delete or archive old data to prevent table from growing too large
+      - [x] Retention Policy. Delete or archive old data to prevent table from growing too large
         - [x] Automatically install pg_cron to PostgreSQL
         - [x] Schedule simple tasks to query data, analyze data, or remove with cron based on a fixed-interval. (Airflow is more overhead)
-        - [ ] Implement a retention policy with cron
+        - [x] Implement a retention policy with cron to delete/archive data every 30 days
       - [ ] Compression (pg_compress in PostgreSQL) to reduce size of historical data
   - # 
  
