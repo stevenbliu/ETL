@@ -24,16 +24,15 @@ This checklist represents a comprehensive approach to building a senior-level da
 
 
 ### 3. Data Storage
-- [x] Set up a **PostgreSQL** or **Snowflake** database to store ingested synthetic and API data.
-  - [x] Set up + connect with PSQL in Local 
-  - [x] Set up + connect with PSQL in Docker Container
+- [x] Set up a SQL or **Snowflake** database to store ingested synthetic and API data.
+  - [x] Set up + connect with PostgreSQL in Local 
+  - [x] Set up + connect with PostgreSQL in Docker Container
 - [x] Write a pipeline to ingest weather data into **PostgreSQL/Snowflake** 
   - [x] Ensure successful data storage.
-- [ ] Optimize database schema and tables for time-series or batch data (weather data, in this case).
-  ## Databases to use depend in data
-  - # Time-Series: Use TimescaleDB, InfluxDB
-    - When to use
-      - Specialized time-series databases
+- [~] Optimize database schema and tables for time-series or batch data (weather data, in this case).
+- [x] Set up a NoSQL database
+  - [x] Set up + connect with MongoDB in Docker
+  ## Database Selection
   - #### Batch: PostgreSQL, MySQL, SQL Server
     - When to use: 
       - Require complex SQL queries, joins, relational data integrity
@@ -45,7 +44,7 @@ This checklist represents a comprehensive approach to building a senior-level da
         - Isolation:  Ensures that transactions are executed in such a way that they do not interfere with each other. Even if multiple transactions are occurring simultaneously, they should not affect each other's results.
 
         - Durability: Guarantees that once a transaction has been committed, it will remain so, even in the event of a power failure, crash, or other types of system failure.
-        
+
       - Enforce foreign key constraints, data integrity, and support for complex relational models
     - Can be opimized by:
       - [x] Partitioning based on time-intervals (daily, monthly, yearly)
@@ -58,14 +57,17 @@ This checklist represents a comprehensive approach to building a senior-level da
         - [x] Implement a retention policy with cron to delete/archive data every 30 days
       - [ ] Compression (pg_compress in PostgreSQL) to reduce size of historical data
   - 
-  - # MongoDB, NoSQL, Redis, Cassandra
+  - ##### MongoDB, NoSQL, Redis, Cassandra
     - When to use:
       - Require schema flexibility or expect frequent changes to data structure
       - Working with large-scale applications that require high throughput and horizontal scalability.
       - Data has a document-based structure with nested data (e.g., JSON-like documents).
       - Need a NoSQL solution for key-value stores or document-based storage.
       - You need faster performance for simple read/write operations.
- 
+  - ##### Others:
+    - Time-Series: Use TimescaleDB, InfluxDB
+      - Specialized time-series databases
+
 ---
 ---
 
