@@ -1,14 +1,28 @@
 import psycopg2
 import random
 from datetime import datetime, timedelta
+import calendar
 
 # Connect to your PostgreSQL database
+
+# conn = psycopg2.connect(
+#     dbname="transaction_data",  # Replace with your database name
+#     user="postgres",  # Replace with your username
+#     password="sbl214",  # Replace with your password
+#     host="localhost",  # If running locally
+#     port="5432"  # Default PostgreSQL port
+# )
+# Connect to your PostgreSQL database
 conn = psycopg2.connect(
-    dbname="transaction_data",  # Replace with your database name
-    user="postgres",  # Replace with your username
-    password="sbl214",  # Replace with your password
-    host="localhost",  # If running locally
-    port="5432"  # Default PostgreSQL port
+    dbname="mydatabase",  # Replace with your database name
+    user="myuser",  # Replace with your username
+    password="mysecretpassword",  # Replace with your password
+    # host="172.21.0.2",  # If running container
+    host="localhost",  # If running container
+    # host = "psql-postgres-1",
+    # host = '0.0.0.0',
+    # host = 'host.docker.internal', 
+    port="5433"  # Default PostgreSQL port
 )
 cur = conn.cursor()
 
@@ -32,11 +46,18 @@ for i in range(1, 100):
     # Modify the month based on the index i (cycle through months)
     new_month = (base_timestamp.month + i - 1) % 12 + 1  # Ensure month stays between 1 and 12
     
-    # Create a new timestamp with the modified month (keeping day, hour, minute, etc. unchanged)
-    current_timestamp = base_timestamp.replace(month=new_month) + timedelta(minutes=i)
+    # Get the number of days in the new month
+    _, last_day_of_month = calendar.monthrange(base_timestamp.year, new_month)
     
-    # Generate transaction ID based on the timestamp (you can use any part of the timestamp here)
+    # Ensure the day is within the valid range for the new month
+    new_day = min(base_timestamp.day, last_day_of_month)
+    
+    # Create a new timestamp with the modified month (keeping hour, minute, etc. unchanged)
+    current_timestamp = base_timestamp.replace(month=new_month, day=new_day) + timedelta(minutes=i)
+    
+    # Generate transaction ID based on the timestamp (Unix timestamp in seconds)
     transaction_id = int(current_timestamp.timestamp())  # Unix timestamp in seconds
+    
     
     # Format the timestamp
     timestamp_str = current_timestamp.strftime('%Y-%m-%dT%H:%M:%SZ')

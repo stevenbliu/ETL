@@ -1,4 +1,4 @@
-version: '3.8'
+# version: '3.8'
 services:
   postgres:
     image: postgres:13
@@ -7,11 +7,12 @@ services:
       POSTGRES_PASSWORD: mysecretpassword
       POSTGRES_DB: mydatabase
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - ./data:/var/lib/postgresql/data
     networks:
-      - mynetwork
+      # - mynetwork
+      - psql_network
     restart: unless-stopped
 
   pgadmin:
@@ -24,9 +25,13 @@ services:
     depends_on:
       - postgres
     networks:
-      - mynetwork
+      # - mynetwork
+      - psql_network
+
     restart: unless-stopped
 
 networks:
-  mynetwork:
+  # mynetwork:
+  #   driver: bridge
+  psql_network:
     driver: bridge
