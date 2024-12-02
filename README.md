@@ -32,9 +32,22 @@ This checklist represents a comprehensive approach to building a senior-level da
 - [ ] Optimize database schema and tables for time-series or batch data (weather data, in this case).
   ## Databases to use depend in data
   - # Time-Series: Use TimescaleDB, InfluxDB
-    - Specialized time-series databases
+    - When to use
+      - Specialized time-series databases
   - #### Batch: PostgreSQL, MySQL, SQL Server
-    - General Relational Databases can be be optimized with:
+    - When to use: 
+      - Require complex SQL queries, joins, relational data integrity
+      - Well-defined schema and ACID transactions
+        - Atomicity:  Ensures that all operations within a transaction are treated as a single unit. This means that either all operations succeed or none of them are applied.
+
+        - Consistency: Ensures that a transaction brings the database from one valid state to another. It enforces rules such as constraints (e.g., primary keys, foreign keys, and check constraints) so that the data remains correct and valid according to the database schema.
+
+        - Isolation:  Ensures that transactions are executed in such a way that they do not interfere with each other. Even if multiple transactions are occurring simultaneously, they should not affect each other's results.
+
+        - Durability: Guarantees that once a transaction has been committed, it will remain so, even in the event of a power failure, crash, or other types of system failure.
+        
+      - Enforce foreign key constraints, data integrity, and support for complex relational models
+    - Can be opimized by:
       - [x] Partitioning based on time-intervals (daily, monthly, yearly)
       - [x] Create indexes frequently queried fields (IDs, etc.)
         - [x] Created index for transaction_types
@@ -44,7 +57,14 @@ This checklist represents a comprehensive approach to building a senior-level da
         - [x] Schedule simple tasks to query data, analyze data, or remove with cron based on a fixed-interval. (Airflow is more overhead)
         - [x] Implement a retention policy with cron to delete/archive data every 30 days
       - [ ] Compression (pg_compress in PostgreSQL) to reduce size of historical data
-  - # 
+  - 
+  - # MongoDB, NoSQL, Redis, Cassandra
+    - When to use:
+      - Require schema flexibility or expect frequent changes to data structure
+      - Working with large-scale applications that require high throughput and horizontal scalability.
+      - Data has a document-based structure with nested data (e.g., JSON-like documents).
+      - Need a NoSQL solution for key-value stores or document-based storage.
+      - You need faster performance for simple read/write operations.
  
 ---
 ---
