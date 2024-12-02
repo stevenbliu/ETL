@@ -25,18 +25,17 @@ This checklist represents a comprehensive approach to building a senior-level da
 
 ### 3. Data Storage
 - [x] Set up a **PostgreSQL** or **Snowflake** database to store ingested synthetic and API data.
-  - [x] Set up with PSQL on host machine
-  - [ ] Set up PSQL in a Docker Container w/ pg_cron
+  - [x] Set up + connect with PSQL in Local 
+  - [x] Set up + connect with PSQL in Docker Container
 - [x] Write a pipeline to ingest weather data into **PostgreSQL/Snowflake** 
-- [x] Ensure successful data storage.
-- [ ] Ensure database schema and tables are optimized for time-series or batch data (weather data, in this case).
-- [ ] Set up PSQL in a docker container
+  - [x] Ensure successful data storage.
+- [ ] Optimize database schema and tables for time-series or batch data (weather data, in this case).
   ## Databases to use depend in data
   - # Time-Series: Use TimescaleDB, InfluxDB
     - Specialized time-series databases
   - # Batch: PostgreSQL, MySQL, SQL Server
     - General Relational Databases can be be optimized with:
-      - [ ] Partitioning based on time-intervals (daily, monthly, yearly)
+      - [x] Partitioning based on time-intervals (daily, monthly, yearly)
       - [x] Create indexes frequently queried fields (IDs, etc.)
         - [x] Created index for transaction_types
         - [x] Verified index is created
