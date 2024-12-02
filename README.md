@@ -33,7 +33,7 @@ This checklist represents a comprehensive approach to building a senior-level da
   ## Databases to use depend in data
   - # Time-Series: Use TimescaleDB, InfluxDB
     - Specialized time-series databases
-  - # Batch: PostgreSQL, MySQL, SQL Server
+  - #### Batch: PostgreSQL, MySQL, SQL Server
     - General Relational Databases can be be optimized with:
       - [x] Partitioning based on time-intervals (daily, monthly, yearly)
       - [x] Create indexes frequently queried fields (IDs, etc.)
