@@ -75,7 +75,9 @@ This checklist represents a comprehensive approach to building a senior-level da
 
 ### 4. Batch Processing with Apache Spark
 - [x] Install **Apache Spark** on your local environment or cloud.
-  - [x] Install in Docker container
+  - [x] Set up dockerized Spark 
+  - [x] Set up driver/master  + workers
+  - [x] Tested connection and data retrieval from PSQL datbase on Jupyter with PySpark
 - [ ] Write a **Spark batch job** to process data 
   - [] Data from PostgreSQL/Snowflake.
   - [] Data from file-base
@@ -93,9 +95,7 @@ This checklist represents a comprehensive approach to building a senior-level da
 ## Phase 3: Data Transformation and Advanced Processing
 
 ### 6. Data Transformation
-- [x] Set up dockerized Spark 
-  - [x] Set up driver/master  + workers
-  - [x] Connect to PSQL datbase with PySpark and read data on Jupyter
+
 - [ ] Perform **data transformations** using batch processing tools (Spark).
   - Example: Join weather data with external datasets like geolocation information.
   - Example: Create features such as churn probability or customer profiling.
