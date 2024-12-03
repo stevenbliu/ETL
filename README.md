@@ -46,7 +46,7 @@ This checklist represents a comprehensive approach to building a senior-level da
         - Durability: Guarantees that once a transaction has been committed, it will remain so, even in the event of a power failure, crash, or other types of system failure.
 
       - Enforce foreign key constraints, data integrity, and support for complex relational models
-    - Can be opimized by:
+    - Can be optimized by:
       - [x] Partitioning based on time-intervals (daily, monthly, yearly)
       - [x] Create indexes frequently queried fields (IDs, etc.)
         - [x] Created index for transaction_types
@@ -156,6 +156,7 @@ This checklist represents a comprehensive approach to building a senior-level da
 - [ ] Migrate parts of your pipeline to **cloud services** like AWS, GCP, or Azure (e.g., S3 for storage, BigQuery for processing).
 - [ ] Set up **cloud storage** for large-scale datasets and model outputs.
 - [ ] Integrate **cloud data lakes** for scalable storage and processing.
+
 
 ### 15. Documentation
 - [ ] Document the **architecture** of your pipeline (diagramming tools like Lucidchart or draw.io).
