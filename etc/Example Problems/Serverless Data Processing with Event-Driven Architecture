@@ -1,0 +1,20 @@
+5. Serverless Data Processing with Event-Driven Architecture
+Problem: Design an event-driven serverless architecture to process data from various sources and trigger business workflows.
+
+Tools:
+
+AWS Lambda (for serverless functions)
+AWS EventBridge / AWS SNS (for event-driven architecture)
+DynamoDB (for fast, scalable NoSQL storage)
+AWS Step Functions (for orchestrating workflows)
+Techniques:
+
+Event-Driven Architecture: Use EventBridge or SNS to trigger Lambda functions when specific events occur, ensuring that processing happens in response to data changes without polling.
+Serverless Design: Leverage AWS Lambda to run code in response to events, scaling automatically with demand and reducing infrastructure management overhead.
+Microservices: Break down tasks into smaller, isolated functions that can be independently maintained and scaled.
+Auto-scaling: Use Lambda and DynamoDB to scale both computation and storage dynamically, ensuring efficient resource utilization.
+Why these tools and techniques?
+
+Event-driven architecture minimizes delays and reduces costs by triggering computation only when necessary.
+Serverless design allows the system to automatically adjust to demand, optimizing cost and scalability without manual intervention.
+Microservices and auto-scaling make the system flexible, maintainable, and cost-effective as it grows.

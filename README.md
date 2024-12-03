@@ -32,7 +32,7 @@ This checklist represents a comprehensive approach to building a senior-level da
 - [~] Optimize database schema and tables for time-series or batch data (weather data, in this case).
 - [x] Set up a NoSQL database
   - [x] Set up + connect with MongoDB in Docker
-  ## Database Selection
+  #### Database Selection
   - #### Batch: PostgreSQL, MySQL, SQL Server
     - When to use: 
       - Require complex SQL queries, joins, relational data integrity
@@ -78,12 +78,18 @@ This checklist represents a comprehensive approach to building a senior-level da
   - [x] Set up dockerized Spark 
   - [x] Set up driver/master  + workers
   - [x] Tested connection and data retrieval from PSQL datbase on Jupyter with PySpark
-- [ ] Write a **Spark batch job** to process data 
+- [ ] Write a **Spark batch job** to process data (Ingest data from multiple sources (PSQL, SnowFlake, Mongo, File-based))
   - [] Data from PostgreSQL/Snowflake.
   - [] Data from file-base
 - [ ] Perform aggregations, joins, and other batch transformations on the data.
+  - [ ] Filtering, Grouping, Aggregating according to some 'business requirements'
+  - [ ] Join + Combine data from multiple sources
 - [ ] Store the processed data back into the database for downstream analysis.
-
+  - [ ] Decide on what output format data should be in. (Ex. Parquet is a columnar format optmized for large-scale processing)
+  - [ ] Can write to database like PSQL or filed-based like S3
+- [ ] Faul Tolerance
+  - [ ] Use Spark's built-in error handling and retries to ensures failures can be managed at scale. 
+  - [ ] For more robust failure handling, include logging and alerting from tools like Apache Airflow
 ### 5. Real-Time Processing with Kafka Streams
 - [ ] Set up **Kafka Streams** for processing real-time data (transaction data, etc.).
 - [ ] Build a **Kafka Streams topology** for real-time processing of incoming data.
@@ -101,6 +107,12 @@ This checklist represents a comprehensive approach to building a senior-level da
   - Example: Create features such as churn probability or customer profiling.
 - [ ] Write **complex SQL queries** involving joins, window functions, and aggregations for real-time and batch data.
 - [ ] Ensure **data quality** through transformations, handling null values, and ensuring data consistency.
+- [ ] Performance Optimization with Spark
+  - [ ] Partioning - When you know what keys will see a lot of operations
+  - [ ] Caching - When you expect the same dataset to be re-used multiple times
+  - [ ] Broadcast Join - When one DataFrame is small enough to fit in memory and you want to optimize join performance
+  - [ ] Coalescing - When reducing the number of partitions after transformations, particularly before saving the data to disk or external systems
+  - [ ] Push Down Predicates - When reading data from external sources (like databases) to minimize the data read into Spark.
 
 ### 7. Real-Time Fraud Detection Pipeline
 - [ ] Set up **Flink** or **Kafka Streams** for fraud detection with real-time transaction data.
