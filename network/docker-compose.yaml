@@ -1,0 +1,4 @@
+networks:
+  psql_network:
+    name: psql_network  # Explicit name to avoid duplicates
+    driver: bridge

@@ -1,54 +1,81 @@
-version: '3.8'
+version: "3.8"
+
 services:
   spark-master:
     image: bitnami/spark:latest
-    container_name: spark-master
-    hostname: spark-master
     environment:
       - SPARK_MODE=master
-      - SPARK_MASTER_PORT=7077
+      - SPARK_MASTER_HOST=spark-master
+      - SPARK_LOCAL_IP=spark-master
+      - SPARK_MASTER_WEBUI_PORT=8080
+      - SPARK_SERIALIZER=org.apache.spark.serializer.KryoSerializer
+
     ports:
-      - "7077:7077"
-      - "8080:8080"  # Spark Web UI
+      - "8080:8080"    # Spark UI
+      - "7077:7077"    # Spark Master Port
+    volumes:
+      - ./jars:/opt/spark/jars  # JDBC Driver (make sure postgresql jar is in ./jars)
+      - spark-master-data:/opt/spark/data
+
     networks:
-      - spark-network
+      - psql_network
 
   spark-worker-1:
     image: bitnami/spark:latest
-    container_name: spark-worker-1
-    hostname: spark-worker-1
     environment:
       - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark-master:7077
-    ports:
-      - "8081:8081"  # Spark Worker Web UI
+      - SPARK_MASTER=spark://spark-master:7077
+      - SPARK_WORKER_WEBUI_PORT=8081
+    depends_on:
+      - spark-master
+    volumes:
+      - ./jars:/opt/spark/jars  # JDBC Driver for worker 1
+      - spark-worker-data:/opt/spark/data
+
     networks:
-      - spark-network
+      - psql_network
+    ports:
+      - "8081:8081"  # Worker 1 Web UI
 
   spark-worker-2:
     image: bitnami/spark:latest
-    container_name: spark-worker-2
-    hostname: spark-worker-2
     environment:
       - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark-master:7077
-    ports:
-      - "8082:8081"  # Spark Worker Web UI
-    networks:
-      - spark-network
+      - SPARK_MASTER=spark://spark-master:7077
+      - SPARK_WORKER_WEBUI_PORT=8082  
+    depends_on:
+      - spark-master
+    volumes:
+      - ./jars:/opt/spark/jars  # JDBC Driver for worker 2
+      - spark-worker-data:/opt/spark/data
 
-  jupyter:
-    image: jupyter/pyspark-notebook
-    container_name: jupyter
+    networks:
+      - psql_network
+    ports:
+      - "8082:8082"  # Worker 2 Web UI
+
+  pyspark:
+    image: jupyter/pyspark-notebook:latest
+    container_name: pyspark
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
     ports:
       - "8888:8888"
     volumes:
       - ./notebooks:/home/jovyan/work
+      - ./jars:/opt/spark/jars
+    depends_on:
+      - spark-master
+    command: >
+      start-notebook.sh --NotebookApp.token='' --NotebookApp.password=''
     networks:
-      - spark-network
-    environment:
-      - JUPYTER_ENABLE_LAB=yes
+      - psql_network
+
+volumes:
+  # postgres-data: {}
+  spark-master-data:
+  spark-worker-data:
 
 networks:
-  spark-network:
-    driver: bridge
+  psql_network:
+    external: true

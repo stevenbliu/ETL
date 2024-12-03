@@ -31,7 +31,6 @@ services:
       # - ./path/to/servers.json:/pgadmin4/servers.json  # Update this path
 
     networks:
-      # - mynetwork
       - psql_network
 
     restart: unless-stopped
@@ -40,4 +39,4 @@ networks:
   # mynetwork:
   #   driver: bridge
   psql_network:
-    driver: bridge
+    external: true

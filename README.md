@@ -74,8 +74,11 @@ This checklist represents a comprehensive approach to building a senior-level da
 ## Phase 2: Batch and Real-Time Data Integration
 
 ### 4. Batch Processing with Apache Spark
-- [ ] Install **Apache Spark** on your local environment or cloud.
-- [ ] Write a **Spark batch job** to process the weather data stored in PostgreSQL/Snowflake.
+- [x] Install **Apache Spark** on your local environment or cloud.
+  - [x] Install in Docker container
+- [ ] Write a **Spark batch job** to process data 
+  - [] Data from PostgreSQL/Snowflake.
+  - [] Data from file-base
 - [ ] Perform aggregations, joins, and other batch transformations on the data.
 - [ ] Store the processed data back into the database for downstream analysis.
 
