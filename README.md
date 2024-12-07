@@ -1,5 +1,9 @@
-# Data Engineering Project 
+# Transaction Data Pipeline:
+  - Gather transaction data from mulitple sources
+  - Monitor transactions for anomolies as they occur (real-time)
+  - Dashboard of historical summary of transactions (batch) 
 
+# Data Engineering Project Checklist
 This checklist represents a comprehensive approach to building a senior-level data engineering project, with tasks divided into specific, manageable phases. 
 - **Comprehensive Coverage**: It includes foundational tasks, real-time processing, scaling, error handling, and automation.
 - **Progressive Complexity**: Tasks are ordered from simple setup to advanced integrations, ensuring a logical flow.
@@ -86,7 +90,7 @@ This checklist represents a comprehensive approach to building a senior-level da
     - [ ] Handling
 - [ ] Perform aggregations, joins, and other batch transformations on the data.
   - [ ] Filtering, Grouping, Aggregating according to some 'business requirements'
-  - [ ] Join + Combine data from multiple sources
+  - [x] Join + Combine data from multiple sources
 - [ ] Store the processed data back into the database for downstream analysis.
   - [ ] Decide on what output format data should be in. (Ex. Parquet is a columnar format optmized for large-scale processing)
   - [ ] Can write to database like PSQL or filed-based like S3
