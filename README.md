@@ -78,9 +78,12 @@ This checklist represents a comprehensive approach to building a senior-level da
   - [x] Set up dockerized Spark 
   - [x] Set up driver/master  + workers
   - [x] Tested connection and data retrieval from PSQL datbase on Jupyter with PySpark
-- [ ] Write a **Spark batch job** to process data (Ingest data from multiple sources (PSQL, SnowFlake, Mongo, File-based))
-  - [] Data from PostgreSQL/Snowflake.
-  - [] Data from file-base
+- [x] Write a **Spark batch job** to process data (Ingest data from multiple sources (PSQL, SnowFlake, Mongo, File-based))
+  - [x] Data from PostgreSQL/Snowflake.
+  - [x] Data from file-base
+- [x] Data Quality Handling
+    - [x] Schema validation, Duplicates, Nulls Checks
+    - [ ] Handling
 - [ ] Perform aggregations, joins, and other batch transformations on the data.
   - [ ] Filtering, Grouping, Aggregating according to some 'business requirements'
   - [ ] Join + Combine data from multiple sources
