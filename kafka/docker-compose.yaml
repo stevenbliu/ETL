@@ -68,4 +68,20 @@ services:
       CONNECT_CONFIG_STORAGE_TOPIC: connect-configs
       CONNECT_OFFSET_STORAGE_TOPIC: connect-offsets
       CONNECT_STATUS_STORAGE_TOPIC: connect-status
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+
+
+  kafka-streams-app:
+    build: ./kafka-streams-app
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - KAFKA_STREAMS_APPLICATION_ID=kafka-streams-app
+    depends_on:
+      - kafka
+    command: java -jar /app/kafka-streams-app.jar
+    volumes:
+      - ./kafka-streams-app:/app
+
 
